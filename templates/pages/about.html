@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us - MySite{% endblock %}
+
+{% block extra_css %}
+<style>
+    .about-hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 4rem 0;
+        color: white;
+        margin-bottom: 3rem;
+    }
+
+    .about-hero h1 {
+        font-size: 3rem;
+        font-weight: 700;
+    }
+
+    .mission-vision-card {
+        background: white;
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        height: 100%;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(102, 126, 234, 0.1);
+    }
+
+    .mission-vision-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(102, 126, 234, 0.15);
+    }
+
+    .mission-vision-card .icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        display: block;
+    }
+
+    .team-card {
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        text-align: center;
+    }
+
+    .team-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 50px rgba(102, 126, 234, 0.15);
+    }
+
+    .team-card img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+    }
+
+    .team-card .team-info {
+        padding: 1.5rem;
+    }
+
+    .team-card .team-info h5 {
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+    }
+
+    .team-card .team-info .position {
+        color: #667eea;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+
+    .team-card .social-links a {
+        color: #6b7280;
+        margin: 0 0.5rem;
+        transition: color 0.3s ease;
+        font-size: 1.2rem;
+    }
+
+    .team-card .social-links a:hover {
+        color: #667eea;
+    }
+
+    .values-section {
+        background: #f8fafc;
+        padding: 4rem 0;
+        border-radius: 50px;
+        margin: 3rem 0;
+    }
+
+    .value-item {
+        text-align: center;
+        padding: 2rem;
+    }
+
+    .value-item .icon {
+        font-size: 2.5rem;
+        color: #667eea;
+        margin-bottom: 1rem;
+        display: block;
+    }
+
+    @media (max-width: 768px) {
+        .about-hero h1 {
+            font-size: 2rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- About Hero -->
+<section class="about-hero">
+    <div class="container text-center">
+        <h1>About Us</h1>
+        <p class="lead">Learn more about our mission, vision, and the team behind MySite</p>
+    </div>
+</section>
+
+<!-- Mission & Vision -->
+<div class="container mb-5">
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="mission-vision-card">
+                <span class="icon">🚀</span>
+                <h4>Our Mission</h4>
+                <p class="text-muted">
+                    {{ mission.value|default:"To provide innovative and secure web solutions that empower users to connect, collaborate, and create in a safe digital environment." }}
+                </p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="mission-vision-card">
+                <span class="icon">👁️</span>
+                <h4>Our Vision</h4>
+                <p class="text-muted">
+                    {{ vision.value|default:"To become the leading platform for modern web applications, setting new standards for security, user experience, and innovation." }}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Values Section -->
+<section class="values-section">
+    <div class="container">
+        <h2 class="text-center mb-4">Our Core Values</h2>
+        <div class="row g-4">
+            <div class="col-md-3">
+                <div class="value-item">
+                    <span class="icon">💡</span>
+                    <h5>Innovation</h5>
+                    <p class="text-muted small">Pushing boundaries with cutting-edge technology</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="value-item">
+                    <span class="icon">🔒</span>
+                    <h5>Security</h5>
+                    <p class="text-muted small">Protecting user data with enterprise-grade security</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="value-item">
+                    <span class="icon">🤝</span>
+                    <h5>Collaboration</h5>
+                    <p class="text-muted small">Building strong communities through teamwork</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="value-item">
+                    <span class="icon">⭐</span>
+                    <h5>Excellence</h5>
+                    <p class="text-muted small">Delivering the highest quality user experience</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team Section -->
+<section class="container mb-5">
+    <h2 class="text-center mb-4">Meet Our Team</h2>
+    <div class="row g-4">
+        {% for member in team_members %}
+            <div class="col-md-3">
+                <div class="team-card">
+                    {% if member.photo %}
+                        <img src="{{ member.photo.url }}" alt="{{ member.name }}">
+                    {% else %}
+                        <img src="https://via.placeholder.com/400x250/667eea/ffffff?text={{ member.name|slice:':1' }}" alt="{{ member.name }}">
+                    {% endif %}
+                    <div class="team-info">
+                        <h5>{{ member.name }}</h5>
+                        <p class="position">{{ member.position }}</p>
+                        <p class="text-muted small">{{ member.bio|truncatechars:80 }}</p>
+                        <div class="social-links">
+                            {% if member.linkedin %}
+                                <a href="{{ member.linkedin }}" target="_blank"><i class="fab fa-linkedin"></i></a>
+                            {% endif %}
+                            {% if member.twitter %}
+                                <a href="{{ member.twitter }}" target="_blank"><i class="fab fa-twitter"></i></a>
+                            {% endif %}
+                            {% if member.email %}
+                                <a href="mailto:{{ member.email }}"><i class="fas fa-envelope"></i></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12 text-center text-muted">
+                <p>Team members coming soon!</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

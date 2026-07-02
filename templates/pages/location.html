@@ -1,0 +1,223 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Our Location - MySite{% endblock %}
+
+{% block extra_css %}
+<style>
+    .location-hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 4rem 0;
+        color: white;
+        margin-bottom: 3rem;
+        text-align: center;
+    }
+
+    .location-hero h1 {
+        font-size: 3rem;
+        font-weight: 700;
+    }
+
+    .location-card {
+        background: white;
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        height: 100%;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(102, 126, 234, 0.1);
+    }
+
+    .location-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(102, 126, 234, 0.15);
+    }
+
+    .location-card .icon {
+        font-size: 2.5rem;
+        color: #667eea;
+        margin-bottom: 1rem;
+        display: block;
+    }
+
+    .location-card h5 {
+        font-weight: 700;
+        color: #1f2937;
+    }
+
+    .location-card p {
+        color: #6b7280;
+        margin-bottom: 0;
+    }
+
+    .map-full {
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        height: 500px;
+    }
+
+    .map-full iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+
+    .working-hours {
+        background: #f8fafc;
+        border-radius: 20px;
+        padding: 2rem;
+    }
+
+    .working-hours .day {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .working-hours .day:last-child {
+        border-bottom: none;
+    }
+
+    .working-hours .day .day-name {
+        font-weight: 600;
+        color: #1f2937;
+    }
+
+    .working-hours .day .day-time {
+        color: #6b7280;
+    }
+
+    .directions-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 20px;
+        padding: 2rem;
+        color: white;
+        text-align: center;
+    }
+
+    .directions-card .btn-light {
+        border-radius: 50px;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+        .location-hero h1 {
+            font-size: 2rem;
+        }
+        
+        .map-full {
+            height: 300px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Location Hero -->
+<section class="location-hero">
+    <div class="container">
+        <h1>Our Location</h1>
+        <p class="lead">Find us at our headquarters. We'd love to welcome you in person.</p>
+    </div>
+</section>
+
+<!-- Location Information -->
+<div class="container mb-5">
+    <div class="row g-4">
+        <div class="col-md-6">
+            <div class="location-card">
+                <span class="icon"><i class="fas fa-map-pin"></i></span>
+                <h5>Address</h5>
+                <p>{{ location.address.value|default:"123 Main Street, Suite 100, City, Country" }}</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="location-card">
+                <span class="icon"><i class="fas fa-phone-alt"></i></span>
+                <h5>Phone</h5>
+                <p>{{ location.phone.value|default:"+1 (555) 123-4567" }}</p>
+                <p class="text-muted small">Mon-Fri 9:00 AM - 6:00 PM</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Full Map -->
+<div class="container mb-5">
+    <div class="map-full">
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.2219901290355!2d-74.00369368400567!3d40.71312937933038!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a316bb7ae1b%3A0xb89d1fe6bc499443!2sDowntown%20Conference%20Center!5e0!3m2!1sen!2sus!4v1644262070686!5m2!1sen!2sus" 
+            allowfullscreen="" 
+            loading="lazy">
+        </iframe>
+    </div>
+</div>
+
+<!-- Working Hours & Directions -->
+<div class="container mb-5">
+    <div class="row g-4">
+        <div class="col-lg-6">
+            <div class="working-hours">
+                <h4><i class="fas fa-clock text-primary"></i> Working Hours</h4>
+                <p class="text-muted small">We're here to help during these hours</p>
+                <div class="day">
+                    <span class="day-name">Monday - Friday</span>
+                    <span class="day-time">9:00 AM - 6:00 PM</span>
+                </div>
+                <div class="day">
+                    <span class="day-name">Saturday</span>
+                    <span class="day-time">10:00 AM - 4:00 PM</span>
+                </div>
+                <div class="day">
+                    <span class="day-name">Sunday</span>
+                    <span class="day-time">Closed</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="directions-card">
+                <i class="fas fa-directions fa-3x mb-3"></i>
+                <h4>Get Directions</h4>
+                <p class="mb-3">Need help finding us? Click the button below to get directions from your location.</p>
+                <a href="https://www.google.com/maps/dir//123+Main+Street,+City" target="_blank" class="btn btn-light">
+                    <i class="fas fa-route"></i> Get Directions
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Nearby Places -->
+<section class="container mb-5">
+    <h4 class="text-center mb-4">Nearby Places</h4>
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="location-card">
+                <span class="icon"><i class="fas fa-hotel"></i></span>
+                <h5>Grand Hotel</h5>
+                <p class="text-muted small">0.5 miles away</p>
+                <p>Luxury accommodation for visitors</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="location-card">
+                <span class="icon"><i class="fas fa-utensils"></i></span>
+                <h5>City Bistro</h5>
+                <p class="text-muted small">0.3 miles away</p>
+                <p>Fine dining and casual meals</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="location-card">
+                <span class="icon"><i class="fas fa-parking"></i></span>
+                <h5>Parking Center</h5>
+                <p class="text-muted small">0.2 miles away</p>
+                <p>Convenient parking available</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

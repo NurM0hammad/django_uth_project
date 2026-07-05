@@ -276,6 +276,7 @@
         align-items: center;
         justify-content: center;
         gap: 0.8rem;
+        cursor: pointer;
     }
 
     .btn-login::before {
@@ -368,6 +369,7 @@
         text-decoration: none;
         font-size: 0.9rem;
         font-weight: 500;
+        cursor: pointer;
     }
 
     .social-login .btn-social:hover {
@@ -564,10 +566,10 @@ LOGIN PAGE
 
         <!-- Social Login -->
         <div class="social-login">
-            <a href="#" class="btn-social google">
+            <a href="#" class="btn-social google" onclick="socialLogin('Google')">
                 <i class="fab fa-google"></i> Google
             </a>
-            <a href="#" class="btn-social github">
+            <a href="#" class="btn-social github" onclick="socialLogin('GitHub')">
                 <i class="fab fa-github"></i> GitHub
             </a>
         </div>
@@ -686,6 +688,17 @@ LOGIN PAGE
                 showToast('You have been logged out successfully.', 'success');
             }
         }
+
+        // ==========================================
+        // SOCIAL LOGIN HANDLER
+        // ==========================================
+        window.socialLogin = function(provider) {
+            if (typeof showToast === 'function') {
+                showToast(`${provider} login coming soon! 🚀`, 'info');
+            } else {
+                alert(`${provider} login coming soon!`);
+            }
+        };
 
         // ==========================================
         // DEMO: AUTO-FILL FOR DEVELOPMENT

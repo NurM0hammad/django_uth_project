@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-x-hns^&pt!j97h6**%4hl1))*$#=_6*=w^s(h1ciiw=^fb-#5@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['"django-uth-project.onrender.com"']
 
 
 # Application definition
@@ -119,14 +119,14 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Email Configuration (for development)
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# # Email Configuration (for development)
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # For production, use:
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_HOST = 'smtp.gmail.com'
 # EMAIL_PORT = 587
 # EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = 'your-email@gmail.com'
+# EMAIL_HOST_USER = 'nurmohammadpy@gmil.com'
 # EMAIL_HOST_PASSWORD = 'your-password'
 
 LOGIN_URL = 'accounts:login'
